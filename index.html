@@ -4,19 +4,18 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Jonathan</title>
-  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet" />
   <style>
     :root {
       --accent-color: #89CFF0;
       --bg-dark: #000000;
       --text-light: #F6F6F6;
-      --chess-accent: #A2D5C6;
     }
     body {
-      font-family: 'Share Tech Mono', monospace;
       margin: 0;
       background-color: var(--bg-dark);
       color: var(--text-light);
+      font-family: 'Share Tech Mono', monospace;
       display: flex;
       flex-direction: column;
       min-height: 100vh;
@@ -40,19 +39,15 @@
       margin: 0;
       padding: 0;
     }
-    nav a, .theme-toggle, .matrix-toggle {
+    nav a {
       text-decoration: none;
       color: var(--text-light);
-      background: none;
-      border: none;
-      cursor: pointer;
-      font-size: 0.9rem;
     }
     .container {
       display: flex;
-      flex-direction: row;
       gap: 2rem;
       padding: 2rem;
+      flex: 1;
     }
     .bio {
       flex: 1;
@@ -60,18 +55,24 @@
     .bio h1 {
       color: var(--accent-color);
     }
-    .chessboard {
+    .matrix-box {
       flex: 1;
       background-color: #111;
-      display: flex;
-      justify-content: center;
-      align-items: center;
       border: 2px solid var(--accent-color);
       height: 500px;
       position: sticky;
       top: 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
-    .footer {
+    canvas.matrix-canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+      background: transparent;
+    }
+    footer {
       text-align: center;
       padding: 1rem;
       border-top: 1px solid var(--accent-color);
@@ -83,49 +84,65 @@
   <nav>
     <div class="logo">Jonathan</div>
     <ul>
+      <li><a href="index.html">Home</a></li>
       <li><a href="about.html">About</a></li>
       <li><a href="#contact">Contact</a></li>
       <li><a href="#blog">Blog</a></li>
       <li><a href="#projects">Projects</a></li>
-      <li><button class="theme-toggle" aria-label="Toggle theme">🌓</button></li>
-      <li><button class="matrix-toggle" onclick="toggleMatrix()">Toggle Matrix</button></li>
     </ul>
   </nav>
 
   <div class="container">
     <div class="bio">
-      <h1>&lt;Welcome&gt;</h1>
-      <p>Hi, I'm Jonathan. I'm a generalist passionate about cryptography, security, software development, anthropology, mathematics and reading.</p>
-      <p>I build secure, user-first systems that balance utility and ethics.</p>
-      <p>This space is where I share experiments, thoughts, and tools. Dive into the blog to see what I'm currently working on or thinking through.</p>
+      <h1>&lt;Hi, I'm Jonathan&gt;</h1>
+      <p class="cipher-text">Systems are only as strong as the trust they uphold.</p>
+      <p>I originally chose the name Trust-Worthy because it was available. Over time, it evolved into a philosophy — trust isn’t optional in secure systems; it’s foundational. As I deepened my work in cryptography, cybersecurity, and interpretable AI, the name came to reflect a mission: building systems that defend, rather than exploit, their users.</p>
+      <p>I focus on privacy-preserving, security-conscious, and sustainable software design. My goal is to create tools that are ethically aligned, technically sound, and resilient in a hostile world. Code is power — but trust is the vector.</p>
     </div>
-    <div class="chessboard">
-      <p style="color: var(--accent-color); text-align: center;">♜ ♞ ♝ ♛ ♚ ♝ ♞ ♜<br>♟ ♟ ♟ ♟ ♟ ♟ ♟ ♟</p>
+    <div class="matrix-box">
+      <canvas id="matrixCanvas" class="matrix-canvas"></canvas>
     </div>
   </div>
 
-  <div class="container" id="blog">
-    <div class="bio">
-      <h1>&lt;In the Midst&gt;</h1>
-      <p>Recent musings and code explorations:</p>
-      <!-- Blog posts injected or listed here -->
-    </div>
-    
-  </div>
-
-  <footer class="footer">
+  <footer>
     &copy; 2025 Jonathan
   </footer>
 
   <script>
-    const toggleBtn = document.querySelector('.theme-toggle');
-    toggleBtn.addEventListener('click', () => {
-      document.body.classList.toggle('light');
-    });
+    // Matrix animation inside the matrix box on homepage
+    const canvas = document.getElementById('matrixCanvas');
+    const ctx = canvas.getContext('2d');
 
-    function toggleMatrix() {
-      alert("Matrix toggle placeholder - implement if needed.");
+    function resizeCanvas() {
+      canvas.width = canvas.clientWidth;
+      canvas.height = canvas.clientHeight;
     }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    const letters = "01abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const fontSize = 14;
+    const columns = Math.floor(canvas.width / fontSize);
+    const drops = Array(columns).fill(1);
+
+    function drawMatrix() {
+      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "#89CFF0";
+      ctx.font = fontSize + "px monospace";
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = letters.charAt(Math.floor(Math.random() * letters.length));
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i]++;
+      }
+    }
+
+    setInterval(drawMatrix, 33);
   </script>
 </body>
 </html>
