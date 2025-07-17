@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About – Jonathan</title>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --accent-color: #89CFF0;
+      --bg-dark: #000000;
+      --text-light: #F6F6F6;
+    }
+    body {
+      margin: 0;
+      background-color: var(--bg-dark);
+      color: var(--text-light);
+      font-family: 'Share Tech Mono', monospace;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background-color: rgba(0,0,0,0.9);
+      border-bottom: 1px solid var(--accent-color);
+    }
+    nav .logo {
+      font-size: 1.2rem;
+      color: var(--accent-color);
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1rem;
+    }
+    nav a {
+      text-decoration: none;
+      color: var(--text-light);
+    }
+    .container {
+      display: flex;
+      flex-direction: row;
+      gap: 2rem;
+      padding: 2rem;
+    }
+    .bio {
+      flex: 1;
+    }
+    .bio h1 {
+      color: var(--accent-color);
+    }
+    .chessboard {
+      flex: 1;
+      background-color: #111;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 2px solid var(--accent-color);
+      height: 500px;
+      position: sticky;
+      top: 2rem;
+    }
+    .footer {
+      text-align: center;
+      padding: 1rem;
+      border-top: 1px solid var(--accent-color);
+      margin-top: auto;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="logo">Jonathan</div>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#projects">Projects</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <div class="bio">
+      <h1>&lt;About Me&gt;</h1>
+      <p>I’ve always viewed technology like a chessboard — strategy, creativity, defense, and foresight. My journey began with simple scripts and turned into an obsession with cryptography, digital security, and the philosophy of systems.</p>
+      <p>Each piece on the board represents a passion: development, anthropology, mathematics, language, encryption.</p>
+      <p>Scroll down as the game unfolds...</p>
+    </div>
+    <div class="chessboard" id="chessboard">
+      <!-- Placeholder: real animation logic comes next -->
+      <p style="color: var(--accent-color); text-align: center;">♜ ♞ ♝ ♛ ♚ ♝ ♞ ♜<br>♟ ♟ ♟ ♟ ♟ ♟ ♟ ♟</p>
+    </div>
+  </div>
+
+  <footer class="footer">
+    &copy; 2025 Jonathan
+  </footer>
+
+  <script>
+    // Placeholder for scroll-synced chess game logic
+    // You could animate a chess PGN or sequence here
+    // Later: integrate chess.js or SVG transitions based on scroll position
+  </script>
+</body>
+</html>
