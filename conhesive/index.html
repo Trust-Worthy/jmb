@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jonathan</title>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --accent-color: #89CFF0;
+      --bg-dark: #000000;
+      --bg-light: #f6f6f6;
+      --text-light: #F6F6F6;
+      --text-dark: #111;
+    }
+    body {
+      margin: 0;
+      background-color: var(--bg-dark);
+      color: var(--text-light);
+      font-family: 'EB Garamond', serif;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      font-size: 18px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    body.light {
+      background-color: var(--bg-light);
+      color: var(--text-dark);
+    }
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 2.5rem;
+      background-color: rgba(0,0,0,0.9);
+      border-bottom: 1px solid var(--accent-color);
+      font-size: 1.25rem;
+    }
+    nav .logo {
+      font-size: 1.5rem;
+      color: var(--accent-color);
+      font-weight: 600;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+      margin: 0;
+      padding: 0;
+    }
+    nav a, .theme-toggle {
+      text-decoration: none;
+      color: var(--text-light);
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.1rem;
+      transition: color 0.3s;
+    }
+    body.light nav a,
+    body.light .theme-toggle {
+      color: var(--text-dark);
+    }
+    nav a:hover {
+      color: var(--accent-color);
+    }
+    .container {
+      display: flex;
+      gap: 2rem;
+      padding: 2rem;
+      flex: 1;
+    }
+    .bio {
+      flex: 1;
+      font-size: 1.15rem;
+      line-height: 1.5;
+    }
+    .bio h1 {
+      color: var(--accent-color);
+      font-size: 2rem;
+      margin-top: 0;
+    }
+    .matrix-box {
+      flex: 1;
+      background-color: #111;
+      border: 2px solid var(--accent-color);
+      height: 500px;
+      position: sticky;
+      top: 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      overflow: hidden;
+      padding-bottom: 1rem;
+    }
+    canvas.matrix-canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+      background: transparent;
+    }
+    .blog-preview {
+      padding: 2rem;
+      border-top: 1px solid var(--accent-color);
+      font-size: 1.15rem;
+      color: var(--text-light);
+    }
+    body.light .blog-preview {
+      color: var(--text-dark);
+    }
+    .blog-preview h2 {
+      color: var(--accent-color);
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      position: relative;
+    }
+    .blog-preview h2::before {
+      content: "<Blog> ";
+      color: #A2D5C6;
+      font-weight: 600;
+    }
+    .posts {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .post {
+      background-color: #222;
+      border: 1px solid var(--accent-color);
+      padding: 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .post:hover {
+      background-color: #333;
+    }
+    .post-title {
+      font-weight: 600;
+      margin: 0 0 0.3rem 0;
+    }
+    .post-excerpt {
+      margin: 0;
+      opacity: 0.8;
+    }
+    footer {
+      text-align: center;
+      padding: 1rem;
+      border-top: 1px solid var(--accent-color);
+      margin-top: auto;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="logo">Jonathan</div>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#blog">Blog</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><button class="theme-toggle" aria-label="Toggle theme">🌓</button></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <div class="bio">
+      <h1><Hi, I'm Jonathan></h1>
+      <p class="cipher-text">Systems are only as strong as the trust they uphold.</p>
+      <p>I originally chose the name Trust-Worthy because it was available. Over time, it evolved into a philosophy — trust isn’t optional in secure systems; it’s foundational. As I deepened my work in cryptography, cybersecurity, and interpretable AI, the name came to reflect a mission: building systems that defend, rather than exploit, their users.</p>
+      <p>I focus on privacy-preserving, security-conscious, and sustainable software design. My goal is to create tools that are ethically aligned, technically sound, and resilient in a hostile world. Code is power — but trust is the vector.</p>
+    </div>
+    <div class="matrix-box">
+      <canvas id="matrixCanvas" class="matrix-canvas"></canvas>
+    </div>
+  </div>
+
+  <section class="blog-preview" id="blog">
+    <h2></h2>
+    <div class="posts" id="posts">
+      <!-- Blog posts will be injected here -->
+    </div>
+  </section>
+
+  <footer>
+    © 2025 Jonathan
+  </footer>
+
+  <script>
+    document.querySelector('.theme-toggle').addEventListener('click', () => {
+      document.body.classList.toggle('light');
+    });
+
+    // Blog post sample data (replace with real data)
+    const blogPosts = [
+      {
+        title: "The Philosophy of Trust in Systems",
+        excerpt: "Why trust isn’t optional and how it shapes our digital lives...",
+        url: "#"
+      },
+      {
+        title: "Cryptography: The Art and Science",
+        excerpt: "Exploring the foundations of encryption and its future...",
+        url: "#"
+      },
+      {
+        title: "Sustainable Security Design",
+        excerpt: "Building security solutions that stand the test of time...",
+        url: "#"
+      }
+    ];
+
+    const postsContainer = document.getElementById('posts');
+    blogPosts.forEach(post => {
+      const postEl = document.createElement('div');
+      postEl.classList.add('post');
+      postEl.innerHTML = `
+        <h3 class="post-title">${post.title}</h3>
+        <p class="post-excerpt">${post.excerpt}</p>
+      `;
+      postEl.addEventListener('click', () => {
+        window.location.href = post.url;
+      });
+      postsContainer.appendChild(postEl);
+    });
+
+    // Matrix animation with 10-second run then settle into skyline
+    const canvas = document.getElementById('matrixCanvas');
+    const ctx = canvas.getContext('2d');
+
+    function resizeCanvas() {
+      canvas.width = canvas.clientWidth;
+      canvas.height = canvas.clientHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    const letters = "01abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const fontSize = 14;
+    let columns = Math.floor(canvas.width / fontSize);
+    let drops = Array(columns).fill(1);
+
+    let animationId;
+    let running = true;
+
+    function drawMatrix() {
+      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "#89CFF0";
+      ctx.font = fontSize + "px monospace";
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = letters.charAt(Math.floor(Math.random() * letters.length));
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i]++;
+      }
+    }
+
+    function drawSkyline() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "#89CFF0";
+      ctx.font = fontSize + "px monospace";
+
+      const skylineHeights = [];
+      for (let i = 0; i < columns; i++) {
+        skylineHeights[i] = Math.floor(5 + Math.random() * 15);
+      }
+
+      for (let i = 0; i < columns; i++) {
+        let x = i * fontSize;
+        let height = skylineHeights[i];
+        for (let j = 0; j < height; j++) {
+          const y = canvas.height - (j * fontSize);
+          const letter = letters.charAt(Math.floor(Math.random() * letters.length));
+          ctx.fillText(letter, x, y);
+        }
+      }
+    }
+
+    function animate() {
+      if (running) {
+        drawMatrix();
+        animationId = requestAnimationFrame(animate);
+      }
+    }
+
+    animate();
+
+    setTimeout(() => {
+      running = false;
+      cancelAnimationFrame(animationId);
+      drawSkyline();
+    }, 10000);
+  </script>
+</body>
+</html>
