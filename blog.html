@@ -35,6 +35,11 @@
       padding: 1.5rem 2.5rem;
       background-color: rgba(0,0,0,0.9);
       border-bottom: 1px solid var(--accent-color);
+      font-size: 1.2rem;
+    }
+
+    body.light nav {
+      background-color: rgba(246,246,246,0.9);
     }
 
     nav .logo {
@@ -65,6 +70,10 @@
       color: var(--text-dark);
     }
 
+    nav a:hover, .theme-toggle:hover {
+      color: var(--accent-color);
+    }
+
     .container {
       max-width: 800px;
       margin: 3rem auto;
@@ -84,6 +93,10 @@
       border-bottom: 1px solid #333;
     }
 
+    body.light .post {
+      border-bottom: 1px solid #ccc;
+    }
+
     .post h2 {
       font-size: 1.8rem;
       color: var(--accent-color);
@@ -98,6 +111,7 @@
 
     .post p {
       line-height: 1.6;
+      font-size: 1.2rem;
     }
 
     .footer {
@@ -112,6 +126,7 @@
   <nav>
     <div class="logo">Jonathan</div>
     <ul>
+      <li><a href="index.html">Home</a></li>
       <li><a href="about.html">About</a></li>
       <li><a href="#contact">Contact</a></li>
       <li><a href="blog.html">Blog</a></li>
