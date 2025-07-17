@@ -4,76 +4,85 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Jonathan</title>
-  <link rel="stylesheet" href="styles.css" />
   <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
   <style>
     :root {
       --accent-color: #89CFF0;
-      --chess-accent: #89CFF0;
+      --bg-dark: #000000;
+      --text-light: #F6F6F6;
+      --chess-accent: #A2D5C6;
     }
     body {
       font-family: 'Share Tech Mono', monospace;
       margin: 0;
+      background-color: var(--bg-dark);
+      color: var(--text-light);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
     }
-    .matrix {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 33vh;
-      z-index: -1;
-      background: black;
-      overflow: hidden;
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background-color: rgba(0,0,0,0.9);
+      border-bottom: 1px solid var(--accent-color);
     }
-    canvas {
-      display: block;
+    nav .logo {
+      font-size: 1.2rem;
+      color: var(--accent-color);
     }
-    .matrix-safe-zone {
-      position: relative;
-      background-color: rgba(0, 0, 0, 0.85);
-      padding: 2rem;
-      z-index: 1;
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1rem;
+      margin: 0;
+      padding: 0;
     }
-    .matrix-toggle {
+    nav a, .theme-toggle, .matrix-toggle {
+      text-decoration: none;
+      color: var(--text-light);
       background: none;
       border: none;
-      color: var(--accent-color);
       cursor: pointer;
       font-size: 0.9rem;
-      margin-left: 1rem;
     }
-    h2 {
-      font-size: 1.5rem;
-      text-align: center;
+    .container {
+      display: flex;
+      flex-direction: row;
+      gap: 2rem;
+      padding: 2rem;
+    }
+    .bio {
+      flex: 1;
+    }
+    .bio h1 {
       color: var(--accent-color);
     }
-    .blog-preview h2::before {
-      content: "<Blog> ";
-      color: var(--chess-accent);
+    .chessboard {
+      flex: 1;
+      background-color: #111;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 2px solid var(--accent-color);
+      height: 500px;
+      position: sticky;
+      top: 2rem;
     }
-    .cipher-text {
-      transition: all 0.3s ease;
-      display: inline-block;
-    }
-    .cipher-text:hover {
-      filter: blur(1px);
-      opacity: 0.7;
-      animation: cipher-flicker 1s infinite alternate;
-    }
-    @keyframes cipher-flicker {
-      0% { transform: scale(1); }
-      100% { transform: scale(1.05) rotate(1deg); }
+    .footer {
+      text-align: center;
+      padding: 1rem;
+      border-top: 1px solid var(--accent-color);
+      margin-top: auto;
     }
   </style>
 </head>
 <body>
-  <div class="matrix" id="matrixContainer">
-    <canvas id="matrixCanvas"></canvas>
-  </div>
-
-  <nav class="navbar">
+  <nav>
     <div class="logo">Jonathan</div>
-    <ul class="nav-links">
+    <ul>
       <li><a href="about.html">About</a></li>
       <li><a href="#contact">Contact</a></li>
       <li><a href="#blog">Blog</a></li>
@@ -83,55 +92,40 @@
     </ul>
   </nav>
 
-  <main>
-    
-    <section class="hero matrix-safe-zone">
-    <h1 id="decrypted-text"></h1>
-    <p>
-        I originally chose the name <strong>Trust-Worthy</strong> because it was available. Over time, it evolved into a philosophy—<em>trust isn’t optional in secure systems; it’s foundational</em>.
-    </p>
-    <p>
-        As I deepened my work in cryptography, cybersecurity, and interpretable AI, the name came to reflect a mission: building systems that defend, rather than exploit, their users.
-    </p>
-    <p>
-        I focus on privacy-preserving, security-conscious, and sustainable software design. My goal is to create tools that are ethically aligned, technically sound, and resilient in a hostile world. <strong>Code is power—but trust is the vector.</strong>
-    </p>
-  </main>
+  <div class="container">
+    <div class="bio">
+      <h1>&lt;Welcome&gt;</h1>
+      <p>Hi, I'm Jonathan. I'm a generalist passionate about cryptography, security, software development, anthropology, mathematics and reading.</p>
+      <p>I build secure, user-first systems that balance utility and ethics.</p>
+      <p>This space is where I share experiments, thoughts, and tools. Dive into the blog to see what I'm currently working on or thinking through.</p>
+    </div>
+    <div class="chessboard">
+      <p style="color: var(--accent-color); text-align: center;">♜ ♞ ♝ ♛ ♚ ♝ ♞ ♜<br>♟ ♟ ♟ ♟ ♟ ♟ ♟ ♟</p>
+    </div>
+  </div>
 
-  <footer>
-    <p>&copy; 2025 Jonathan</p>
+  <div class="container" id="blog">
+    <div class="bio">
+      <h1>&lt;In the Midst&gt;</h1>
+      <p>Recent musings and code explorations:</p>
+      <!-- Blog posts injected or listed here -->
+    </div>
+    
+  </div>
+
+  <footer class="footer">
+    &copy; 2025 Jonathan
   </footer>
 
   <script>
-  // Cipher decryption text effect
-  const quote = "Systems are only as strong as the trust they uphold.";
-  const target = document.getElementById('decrypted-text');
-  const charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  let iterations = 0;
+    const toggleBtn = document.querySelector('.theme-toggle');
+    toggleBtn.addEventListener('click', () => {
+      document.body.classList.toggle('light');
+    });
 
-  function decryptEffect() {
-    const progress = Math.min(iterations / quote.length, 1);
-    let displayText = '';
-
-    for (let i = 0; i < quote.length; i++) {
-      if (i < iterations) {
-        displayText += quote[i];
-      } else if (quote[i] === ' ') {
-        displayText += ' ';
-      } else {
-        displayText += charset[Math.floor(Math.random() * charset.length)];
-      }
+    function toggleMatrix() {
+      alert("Matrix toggle placeholder - implement if needed.");
     }
-
-    target.textContent = displayText;
-    iterations += 1;
-
-    if (iterations <= quote.length) {
-      requestAnimationFrame(decryptEffect);
-    }
-  }
-
-  decryptEffect();
-</script>
+  </script>
 </body>
 </html>
