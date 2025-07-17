@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>About – Jonathan</title>
-  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jonathan</title>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap" rel="stylesheet">
   <style>
     :root {
       --accent-color: #89CFF0;
@@ -14,6 +14,7 @@
       --text-dark: #111;
       --chess-accent: #A2D5C6;
     }
+
     body {
       font-family: 'EB Garamond', serif;
       margin: 0;
@@ -30,6 +31,7 @@
       background-color: var(--bg-light);
       color: var(--text-dark);
     }
+
     nav {
       display: flex;
       justify-content: space-between;
@@ -39,11 +41,13 @@
       border-bottom: 1px solid var(--accent-color);
       font-size: 1.2rem;
     }
+
     nav .logo {
       font-size: 1.6rem;
       color: var(--accent-color);
     }
-     nav ul {
+
+    nav ul {
       list-style: none;
       display: flex;
       gap: 1.5rem;
@@ -66,13 +70,14 @@
     body.light .matrix-toggle {
       color: var(--text-dark);
     }
+
     .container {
       display: flex;
       flex-direction: row;
       gap: 2rem;
       padding: 2rem;
     }
-    
+
     .bio {
       flex: 1;
       font-size: 1.2rem;
@@ -84,7 +89,7 @@
       font-size: 2.2rem;
     }
 
-   .chessboard {
+    .chessboard {
       flex: 1;
       background-color: #111;
       display: flex;
@@ -96,6 +101,7 @@
       top: 2rem;
       overflow: hidden;
     }
+
     .footer {
       text-align: center;
       padding: 1rem;
@@ -108,9 +114,9 @@
   <nav>
     <div class="logo">Jonathan</div>
     <ul>
-      <li><a href="index.html">Home</a></li>
       <li><a href="about.html">About</a></li>
       <li><a href="#contact">Contact</a></li>
+      <li><a href="#blog">Blog</a></li>
       <li><a href="#projects">Projects</a></li>
       <li><button class="theme-toggle" aria-label="Toggle theme">🌓</button></li>
       <li><button class="matrix-toggle" onclick="toggleMatrix()">Toggle Matrix</button></li>
@@ -119,13 +125,12 @@
 
   <div class="container">
     <div class="bio">
-      <h1>&lt;About Me&gt;</h1>
-      <p>I’ve always viewed technology like a chessboard — strategy, creativity, defense, and foresight. My journey began with simple scripts and turned into an obsession with cryptography, digital security, and the philosophy of systems.</p>
-      <p>Each piece on the board represents a passion: development, anthropology, mathematics, language, encryption.</p>
-      <p>Scroll down as the game unfolds...</p>
+      <h1>&lt;Welcome&gt;</h1>
+      <p>Hi, I'm Jonathan. I'm a generalist passionate about cryptography, security, software development, anthropology, mathematics and reading.</p>
+      <p>I build secure, user-first systems that balance utility and ethics.</p>
+      <p>This space is where I share experiments, thoughts, and tools. Dive into the blog to see what I'm currently working on or thinking through.</p>
     </div>
-    <div class="chessboard" id="chessboard">
-      <!-- Placeholder: real animation logic comes next -->
+    <div class="chessboard">
       <canvas id="chessCanvas" width="400" height="400"></canvas>
     </div>
   </div>
@@ -181,30 +186,12 @@
       }
     }
 
-
-
     let moveIndex = 0;
     const moves = [
-      { from: [6, 4], to: [4, 4] },
-      { from: [1, 4], to: [3, 4] },
-      { from: [7, 6], to: [5, 5] },
-      { from: [0, 1], to: [2, 2] },
-      { from: [6, 3], to: [4, 3] },
-      { from: [3, 4], to: [4, 3] },
-      { from: [5, 5], to: [3, 4] },
-      { from: [0, 6], to: [2, 5] },
-      { from: [7, 5], to: [4, 2] },
-      { from: [1, 3], to: [2, 3] },
-      { from: [4, 2], to: [1, 5] },
-      { from: [0, 5], to: [3, 2] },
-      { from: [7, 3], to: [3, 7] },
-      { from: [1, 7], to: [2, 7] },
-      { from: [3, 7], to: [1, 7] },
-      { from: [0, 4], to: [0, 6] },
-      { from: [1, 5], to: [2, 5] },
-      { from: [3, 2], to: [2, 3] },
-      { from: [1, 7], to: [0, 7] },
-      { from: [0, 6], to: [1, 7] }
+      { from: [6, 4], to: [4, 4] }, // e2 to e4
+      { from: [1, 4], to: [3, 4] }, // e7 to e5
+      { from: [7, 6], to: [5, 5] }, // Nf3
+      { from: [0, 1], to: [2, 2] }  // Nc6
     ];
 
     function animateMoves() {
