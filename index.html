@@ -84,17 +84,18 @@
   </nav>
 
   <main>
+    
     <section class="hero matrix-safe-zone">
-      <h1 class="cipher-text">Hi, I'm Jonathan.</h1>
-      <p class="cipher-text">I'm a generalist passionate about...</p>
-    </section>
-
-    <section class="blog-preview" id="blog">
-      <h2></h2>
-      <div class="posts">
-        <!-- Blog posts will be injected here -->
-      </div>
-    </section>
+    <h1 id="decrypted-text"></h1>
+    <p>
+        I originally chose the name <strong>Trust-Worthy</strong> because it was available. Over time, it evolved into a philosophy—<em>trust isn’t optional in secure systems; it’s foundational</em>.
+    </p>
+    <p>
+        As I deepened my work in cryptography, cybersecurity, and interpretable AI, the name came to reflect a mission: building systems that defend, rather than exploit, their users.
+    </p>
+    <p>
+        I focus on privacy-preserving, security-conscious, and sustainable software design. My goal is to create tools that are ethically aligned, technically sound, and resilient in a hostile world. <strong>Code is power—but trust is the vector.</strong>
+    </p>
   </main>
 
   <footer>
@@ -102,50 +103,35 @@
   </footer>
 
   <script>
-    // Theme toggle
-    const toggleBtn = document.querySelector('.theme-toggle');
-    toggleBtn.addEventListener('click', () => {
-      document.body.classList.toggle('light');
-    });
+  // Cipher decryption text effect
+  const quote = "Systems are only as strong as the trust they uphold.";
+  const target = document.getElementById('decrypted-text');
+  const charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  let iterations = 0;
 
-    // Matrix animation
-    const canvas = document.getElementById('matrixCanvas');
-    const ctx = canvas.getContext('2d');
-    canvas.height = window.innerHeight / 3;
-    canvas.width = window.innerWidth;
+  function decryptEffect() {
+    const progress = Math.min(iterations / quote.length, 1);
+    let displayText = '';
 
-    const letters = "01abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    const fontSize = 14;
-    const columns = canvas.width / fontSize;
-    const drops = Array(Math.floor(columns)).fill(1);
-    let drawMatrixInterval = setInterval(drawMatrix, 33);
-
-    function drawMatrix() {
-      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = "#CFFFE2";
-      ctx.font = fontSize + "px monospace";
-      for (let i = 0; i < drops.length; i++) {
-        const text = letters.charAt(Math.floor(Math.random() * letters.length));
-        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-
-        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-          drops[i] = 0;
-        }
-        drops[i]++;
-      }
-    }
-
-    function toggleMatrix() {
-      const matrixContainer = document.getElementById('matrixContainer');
-      if (matrixContainer.style.display === 'none') {
-        matrixContainer.style.display = 'block';
-        drawMatrixInterval = setInterval(drawMatrix, 33);
+    for (let i = 0; i < quote.length; i++) {
+      if (i < iterations) {
+        displayText += quote[i];
+      } else if (quote[i] === ' ') {
+        displayText += ' ';
       } else {
-        matrixContainer.style.display = 'none';
-        clearInterval(drawMatrixInterval);
+        displayText += charset[Math.floor(Math.random() * charset.length)];
       }
     }
-  </script>
+
+    target.textContent = displayText;
+    iterations += 1;
+
+    if (iterations <= quote.length) {
+      requestAnimationFrame(decryptEffect);
+    }
+  }
+
+  decryptEffect();
+</script>
 </body>
 </html>
