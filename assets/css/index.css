@@ -36,30 +36,8 @@ canvas.matrix-canvas {
     display: block;
     background: transparent;
 }
-/* .blog-preview {
-    padding: 2rem;
-    border-top: 1px solid var(--accent-color);
-    font-size: 1.2rem;
-    color: var(--text-light);
-}
-body.light .blog-preview {
-    color: var(--text-dark);
-}
-.blog-preview h2 {
-    color: var(--accent-color);
-    font-size: 1.8rem;
-    margin-bottom: 1rem;
-    position: relative;
-}
-.blog-preview h2::before {
-    content: "In the Midst";
-    color: #89CFF0;
-    font-weight: 600;
-} */
 
-
-
- .index-preview-section {
+.index-preview-section {
   margin-top: 4rem;
 }
 
