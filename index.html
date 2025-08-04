@@ -21,10 +21,15 @@ title: Home
 </div>
 
 <section class="blog-preview" id="blog">
-  <h2></h2>
-  <div class="posts" id="posts">
-    <!-- Blog posts will be injected here -->
+  <h2>In the Midst</h2>
+  <div class="posts">
+    {% for post in site.posts limit:3 %}
+      <article class="post-preview">
+        <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
+        <p class="post-date">{{ post.date | date: "%B %-d, %Y" }}</p>
+        <p class="post-excerpt">{{ post.excerpt }}</p>
+      </article>
+    {% endfor %}
   </div>
+  <a class="view-all" href="/blog.html">View All Posts →</a>
 </section>
-
-
