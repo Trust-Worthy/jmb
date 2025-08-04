@@ -1,41 +1,41 @@
-    document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () => {
 
     document.querySelector('.theme-toggle').addEventListener('click', () => {
         document.body.classList.toggle('light');
         });
 
     // Blog post sample data (replace with real data)
-    const blogPosts = [
-        {
-        title: "The Philosophy of Trust in Systems",
-        excerpt: "Why trust isn’t optional and how it shapes our digital lives...",
-        url: "#"
-        },
-        {
-        title: "Cryptography: The Art and Science",
-        excerpt: "Exploring the foundations of encryption and its future...",
-        url: "#"
-        },
-        {
-        title: "Sustainable Security Design",
-        excerpt: "Building security solutions that stand the test of time...",
-        url: "#"
-        }
-    ];
+    // const blogPosts = [
+    //     {
+    //     title: "The Philosophy of Trust in Systems",
+    //     excerpt: "Why trust isn’t optional and how it shapes our digital lives...",
+    //     url: "#"
+    //     },
+    //     {
+    //     title: "Cryptography: The Art and Science",
+    //     excerpt: "Exploring the foundations of encryption and its future...",
+    //     url: "#"
+    //     },
+    //     {
+    //     title: "Sustainable Security Design",
+    //     excerpt: "Building security solutions that stand the test of time...",
+    //     url: "#"
+    //     }
+    // ];
 
-    const postsContainer = document.getElementById('posts');
-    blogPosts.forEach(post => {
-        const postEl = document.createElement('div');
-        postEl.classList.add('post');
-        postEl.innerHTML = `
-        <h3 class="post-title">${post.title}</h3>
-        <p class="post-excerpt">${post.excerpt}</p>
-        `;
-        postEl.addEventListener('click', () => {
-        window.location.href = post.url;
-        });
-        postsContainer.appendChild(postEl);
-    });
+    // const postsContainer = document.getElementById('posts');
+    // blogPosts.forEach(post => {
+    //     const postEl = document.createElement('div');
+    //     postEl.classList.add('post');
+    //     postEl.innerHTML = `
+    //     <h3 class="post-title">${post.title}</h3>
+    //     <p class="post-excerpt">${post.excerpt}</p>
+    //     `;
+    //     postEl.addEventListener('click', () => {
+    //     window.location.href = post.url;
+    //     });
+    //     postsContainer.appendChild(postEl);
+    // });
 
     // Matrix animation with 10-second run then 10-second skyline building
     const canvas = document.getElementById('matrixCanvas');
