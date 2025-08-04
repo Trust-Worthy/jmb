@@ -28,12 +28,9 @@
   {{ content }}
 
   {% include footer.html %}
-
-  <script src="/assets/js/index.js"></script>
-
    <!-- Optional per-page JS -->
   {% if page.custom_js %}
-    <script src="{{ page.custom_js }}"></script>
+    <script type="module" src="{{ page.custom_js }}"></script>
   {% endif %}
 </body>
 </html>

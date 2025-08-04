@@ -1,4 +1,6 @@
-const moves = [
+// Karpov vs Kasparov 1985 Chess Championship Game 5
+
+export const moves = [
     // 1. Nf3 Nf6
     { from: [7, 6], to: [5, 5] },
     { from: [0, 6], to: [2, 5] },
