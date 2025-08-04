@@ -6,6 +6,11 @@
   <title>{{ page.title }} | J.M.B.</title>
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/assets/css/index.css" />
+
+  <!-- Optional per-page CSS-->
+  {% if page.custom_css %}
+    <link rel="stylesheet" href="{{ page.custom_css }}">
+  {% endif %}
 </head>
 <body>
   <nav>
@@ -27,5 +32,10 @@
   </footer>
 
   <script src="/assets/js/index.js"></script>
+
+   <!-- Optional per-page JS -->
+  {% if page.custom_js %}
+    <script src="{{ page.custom_js }}"></script>
+  {% endif %}
 </body>
 </html>

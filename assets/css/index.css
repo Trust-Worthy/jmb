@@ -115,8 +115,8 @@ body.light .blog-preview {
     position: relative;
 }
 .blog-preview h2::before {
-    content: "<Blog> ";
-    color: #A2D5C6;
+    content: "In the Midst";
+    color: #89CFF0;
     font-weight: 600;
 }
 .posts {
